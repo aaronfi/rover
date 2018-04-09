@@ -1,0 +1,357 @@
+
+@import 'foundation';  // gives us rem-calc()
+@import 'jquery-ui/resizable';
+@import 'base/shared';
+
+// NOTE: this disables the "bounce" in modern browsers when scrolling past page top or bottom.  http://stackoverflow.com/questions/12046315/prevent-overscrolling-of-web-page
+// It also ensures that the web browser's scrollbar (when scrolling) isn't drawn over the header and footer
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+body > div#topContainer {
+    height: 100%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+
+    @include disable-text-selection;
+}
+// /NOTE
+
+//    How to use rem and px together:
+//    You can set everything as e.g. 1.6rem, 2rem
+//    and then at the top-level, assign 1rem = n pixels
+//    You do this by setting the font-size of the <html> element
+//
+//    What does this give you?
+//    If you needed to double the size of everything on mobile devices, you could do e.g.
+//
+//    @media (...whatever size query, e.g. < 800px) body {
+//        font-size: 200%
+//    }
+//
+//    and now you've effectively zoomed in x2 onto your page.
+//
+//    Also see https://offroadcode.com/prototypes/rem-calculator/
+html {
+    font-size: 100%;  // effectively a 16px font
+}
+
+.navbar {
+    @include disable-text-selection;
+
+    padding: rem-calc(0 0 0 16);
+}
+
+.navbar-brand {
+    font-weight: bolder;
+    white-space: nowrap;
+
+    img {
+        height: rem-calc(60);
+        display: inline-block;
+    }
+}
+
+.navbar-default {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: white;
+    border-color: #e7e7e7;
+    letter-spacing: rem-calc(1) !important;
+
+    // vertically centers our variable height columns in the same row
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    align-items:center;
+    -webkit-align-items: center;
+
+    .navbar-nav {
+        a, a:focus {
+            color: #555;
+        }
+
+        a:hover {
+            color: blue;
+            background-color: white;
+            transition: 0.25s;
+            text-decoration: none;
+        }
+    }
+}
+
+.navbar-header.col-sm-8 li {
+    width: 100%;
+    text-align: center;
+}
+
+ul.nav.navbar-nav {
+    font-size: rem-calc(16);
+}
+
+.navbar-fixed-bottom {
+    padding: rem-calc(4 30);
+
+    ul.navbar-left {
+        width: 100%;
+    }
+
+    ul.navbar-right {
+        white-space: nowrap;
+
+        @media only screen
+        and (min-device-width: 768px)
+        and (max-device-width: 1024px) {
+            padding-right: rem-calc(30);
+        }
+    }
+
+    a {
+        padding-right: rem-calc(12);
+    }
+}
+
+//
+// right-hand-corner menu and contents
+//
+
+.dropdown-toggle {
+    white-space: nowrap;
+    padding: rem-calc(8 16);
+}
+
+$navbar-height: rem-calc(66);
+
+a.dropdown-toggle {
+    text-decoration:none;
+    height: $navbar-height;
+    align-items:center;
+    -webkit-align-items: center;
+
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.dropdown-menu {
+    left: auto;
+    right: 0;
+    margin: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-width: 0;
+
+    .dropdown-item {
+        .icon-container {
+            display: table-cell;
+            padding-right: rem-calc(20);
+            img {
+                width: rem-calc(29);
+            }
+        }
+
+        .text-container {
+            display:table-cell;
+            vertical-align: middle;
+        }
+
+        .sign-in-with-google {
+            z-index: 1100;
+
+            @include disable-text-selection;
+
+            -webkit-font-smoothing: antialiased;
+
+            background: white;
+            border-radius: rem-calc(3);
+            border: rem-calc(1) solid #c4c4c4;
+            color: #565a5c;
+            cursor: pointer;
+            display: table;
+            font: bold rem-calc(16) Circular, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            letter-spacing: normal;
+            margin-bottom: rem-calc(12);
+            padding: rem-calc(12) rem-calc(36);
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: 100%;
+
+            &:hover {
+                border-color: #aaa;
+                background: #f2f2f2;
+            }
+        }
+
+        .sign-in-with-facebook {
+            @include disable-text-selection;
+
+            -webkit-font-smoothing: antialiased;
+
+            background-color: #3B5998;
+            border-bottom-color: #263a63;
+            border-bottom: rem-calc(1) solid rgb(38, 58, 99);
+            border-color: #3B5998;
+            border-left: rem-calc(1) solid rgb(59, 89, 152);
+            border-radius: rem-calc(2);
+            border-right: rem-calc(1) solid rgb(59, 89, 152);
+            border-top: rem-calc(1) solid rgb(59, 89, 152);
+            color: #fff;
+            cursor: pointer;
+            display: table;
+            font: bold rem-calc(16) Circular, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            letter-spacing: normal;
+            margin-top: rem-calc(12);
+            padding: rem-calc(12) rem-calc(36);
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: 100%;
+
+            &:hover {
+                border-color: #4568b2;
+                border-bottom-color: #2d4575;
+                background-color: #4568b2;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.sign-in-with-email {
+    input {
+        background-color: #fff;
+        border-radius: rem-calc(2);
+        border: rem-calc(1) solid #c4c4c4;
+        color: #565a5c;
+        display: block;
+        font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin: rem-calc(4 0);
+        width: 100%;
+    }
+
+    #user_email {
+        background-image: url(https://a2.muscache.com/airbnb/static/signinup/text-field-icons-9c18e4e23864cb33a8f0f7c32c0b86ee.png);
+        background-repeat: no-repeat;
+        background-position: right -33px;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+        font-size: rem-calc(14);
+        margin-top: rem-calc(12);
+        padding: rem-calc(10);
+        width: 100% !important;
+    }
+
+    #user_password {
+        background-image: url(https://a2.muscache.com/airbnb/static/signinup/text-field-icons-9c18e4e23864cb33a8f0f7c32c0b86ee.png);
+        background-repeat: no-repeat;
+        background-position: right -77px;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+        font-size: rem-calc(14);
+        padding: rem-calc(10);
+        width: 100% !important;
+    }
+
+    input:last-child {
+        border-color: #ff5a5f;
+        border-bottom-color: #e00007;
+        background-color: #ff5a5f;
+        color: #fff;
+        margin-bottom: rem-calc(12);
+        padding: rem-calc(9 27);
+        white-space: normal;
+    }
+}
+
+// open right-hand-nav menu on mouseover
+ul.nav li:hover > .dropdown-menu {
+    display: block;
+}
+
+.profile-pic {
+    -webkit-border-radius: rem-calc(3);
+    border-radius: rem-calc(3);
+    margin-left: rem-calc(10);
+}
+
+@font-face {
+    font-family: 'Circular';
+    src:font-url('Circular_Air-Book.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circular';
+    src:font-url('Circular_Air-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.container {
+    max-width: none;
+}
+
+#topContainer {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    background-color: #27ae60;
+    background-image: url(../assets/images/backgrounds/centerpiece.jpg);
+}
+
+#subheading {
+    text-align: center;
+    font-size: rem-calc(22);
+    font-weight: bold;
+    margin-top: 0;
+
+    .jqconsole-cursor {
+        -webkit-animation-name: blinker;
+        -moz-animation-name: blinker;
+        animation-name: blinker;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-timing-function: cubic-bezier(1, 0, 0, 1);
+        -moz-animation-timing-function: cubic-bezier(1, 0, 0, 1);
+        animation-timing-function: cubic-bezier(1, 0, 0, 1);
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        animation-duration: 1s;
+        background: #aaa;
+
+        width: rem-calc(14);
+        height: rem-calc(16);
+        margin: rem-calc(2 -10 0 2);
+        display: inline-block;
+    }
+
+    .selected {
+        background-color: rgba(31, 119, 180, 0.7);
+    }
+
+    .user_0 {
+        background: #d62728
+    }
+
+    .user_1 {
+        background: #1f77b4
+    }
+}
+
+.sign-in {
+    margin-top: rem-calc(90);
+    text-align: center;
+}
