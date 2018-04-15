@@ -55,7 +55,7 @@ html {
 
 .navbar-default {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: white;
+    background-color: lightslategrey;
     border-color: #e7e7e7;
     letter-spacing: rem-calc(1) !important;
 
@@ -113,191 +113,6 @@ ul.nav.navbar-nav {
     }
 }
 
-//
-// right-hand-corner menu and contents
-//
-
-.dropdown-toggle {
-    white-space: nowrap;
-    padding: rem-calc(8 16);
-}
-
-$navbar-height: rem-calc(66);
-
-a.dropdown-toggle {
-    text-decoration:none;
-    height: $navbar-height;
-    align-items:center;
-    -webkit-align-items: center;
-
-
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-}
-
-.dropdown-menu {
-    left: auto;
-    right: 0;
-    margin: 0;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-right-width: 0;
-
-    .dropdown-item {
-        .icon-container {
-            display: table-cell;
-            padding-right: rem-calc(20);
-            img {
-                width: rem-calc(29);
-            }
-        }
-
-        .text-container {
-            display:table-cell;
-            vertical-align: middle;
-        }
-
-        .sign-in-with-google {
-            z-index: 1100;
-
-            @include disable-text-selection;
-
-            -webkit-font-smoothing: antialiased;
-
-            background: white;
-            border-radius: rem-calc(3);
-            border: rem-calc(1) solid #c4c4c4;
-            color: #565a5c;
-            cursor: pointer;
-            display: table;
-            font: bold rem-calc(16) Circular, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            letter-spacing: normal;
-            margin-bottom: rem-calc(12);
-            padding: rem-calc(12) rem-calc(36);
-            text-align: center;
-            text-decoration: none;
-            vertical-align: middle;
-            white-space: nowrap;
-            width: 100%;
-
-            &:hover {
-                border-color: #aaa;
-                background: #f2f2f2;
-            }
-        }
-
-        .sign-in-with-facebook {
-            @include disable-text-selection;
-
-            -webkit-font-smoothing: antialiased;
-
-            background-color: #3B5998;
-            border-bottom-color: #263a63;
-            border-bottom: rem-calc(1) solid rgb(38, 58, 99);
-            border-color: #3B5998;
-            border-left: rem-calc(1) solid rgb(59, 89, 152);
-            border-radius: rem-calc(2);
-            border-right: rem-calc(1) solid rgb(59, 89, 152);
-            border-top: rem-calc(1) solid rgb(59, 89, 152);
-            color: #fff;
-            cursor: pointer;
-            display: table;
-            font: bold rem-calc(16) Circular, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            letter-spacing: normal;
-            margin-top: rem-calc(12);
-            padding: rem-calc(12) rem-calc(36);
-            text-align: center;
-            text-decoration: none;
-            vertical-align: middle;
-            white-space: nowrap;
-            width: 100%;
-
-            &:hover {
-                border-color: #4568b2;
-                border-bottom-color: #2d4575;
-                background-color: #4568b2;
-                color: #fff;
-            }
-        }
-    }
-}
-
-.sign-in-with-email {
-    input {
-        background-color: #fff;
-        border-radius: rem-calc(2);
-        border: rem-calc(1) solid #c4c4c4;
-        color: #565a5c;
-        display: block;
-        font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
-        margin: rem-calc(4 0);
-        width: 100%;
-    }
-
-    #user_email {
-        background-image: url(https://a2.muscache.com/airbnb/static/signinup/text-field-icons-9c18e4e23864cb33a8f0f7c32c0b86ee.png);
-        background-repeat: no-repeat;
-        background-position: right -33px;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        display: block;
-        font-size: rem-calc(14);
-        margin-top: rem-calc(12);
-        padding: rem-calc(10);
-        width: 100% !important;
-    }
-
-    #user_password {
-        background-image: url(https://a2.muscache.com/airbnb/static/signinup/text-field-icons-9c18e4e23864cb33a8f0f7c32c0b86ee.png);
-        background-repeat: no-repeat;
-        background-position: right -77px;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        display: block;
-        font-size: rem-calc(14);
-        padding: rem-calc(10);
-        width: 100% !important;
-    }
-
-    input:last-child {
-        border-color: #ff5a5f;
-        border-bottom-color: #e00007;
-        background-color: #ff5a5f;
-        color: #fff;
-        margin-bottom: rem-calc(12);
-        padding: rem-calc(9 27);
-        white-space: normal;
-    }
-}
-
-// open right-hand-nav menu on mouseover
-ul.nav li:hover > .dropdown-menu {
-    display: block;
-}
-
-.profile-pic {
-    -webkit-border-radius: rem-calc(3);
-    border-radius: rem-calc(3);
-    margin-left: rem-calc(10);
-}
-
-@font-face {
-    font-family: 'Circular';
-    src:font-url('Circular_Air-Book.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Circular';
-    src:font-url('Circular_Air-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-}
-
 .container {
     max-width: none;
 }
@@ -307,7 +122,7 @@ ul.nav li:hover > .dropdown-menu {
     background-size: cover;
     background-position: center top;
     background-color: #27ae60;
-    background-image: url(../assets/images/backgrounds/centerpiece.jpg);
+    background-image: url(../assets/images/backgrounds/blackhole.jpg);
 }
 
 #subheading {

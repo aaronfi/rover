@@ -7,9 +7,7 @@
 @import "vendor/ansi";
 @import "vendor/tether.min";
 @import "vendor/bootstrap";
-@import "vendor/bootstrap-slider";
 
 @import "styles/home";
-@import "styles/gobbleboard";
 
 @import "foundation";  // so we can use "rem-calc(14)" instead of "14px".  Sizes based on Root Em instead of pixels, allows for more accurate web page rendering.
