@@ -44,6 +44,8 @@ class CreateInitialSchemas < ActiveRecord::Migration
             t.string :email
             t.string :phone_number
             t.string :image_url
+            t.boolean :is_owner, default: false
+            t.boolean :is_sitter, default: false
 
             t.timestamps
         end
@@ -57,7 +59,7 @@ class CreateInitialSchemas < ActiveRecord::Migration
         add_foreign_key :dogs, :users, column: :owner_id
 
         create_table :sittings do |t|
-            t.string :start_date  # NOTE(aaronfi@) should be t.datetime, but your sample datetime data is unclear to me.
+            t.string :start_date  # NOTE(aaronfi@) should be t.datetime, but your sample datetime data's format is unclear to me.
             t.string :end_date
             t.integer :sitter_id, index: true, foreign_key: true
             t.integer :owner_id, index: true, foreign_key: true

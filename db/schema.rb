@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20140422062725) do
     t.string   "email"
     t.string   "phone_number"
     t.string   "image_url"
+    t.boolean  "is_owner",     default: false
+    t.boolean  "is_sitter",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
