@@ -17,45 +17,54 @@ ActiveRecord::Schema.define(version: 20140422062725) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "game_sessions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "session_id"
-    t.text     "game_url"
-    t.text     "event_log"
+  create_table "dogs", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "game_sessions", ["user_id"], name: "index_game_sessions_on_user_id", using: :btree
+  add_index "dogs", ["owner_id"], name: "index_dogs_on_owner_id", using: :btree
+
+  create_table "dogs_sittings", id: false, force: :cascade do |t|
+    t.integer "sitting_id", null: false
+    t.integer "dog_id",     null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "sitting_id"
+    t.text     "review_text"
+    t.integer  "review_rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reviews", ["sitting_id"], name: "index_reviews_on_sitting_id", using: :btree
+
+  create_table "sittings", force: :cascade do |t|
+    t.string   "start_date"
+    t.string   "end_date"
+    t.integer  "sitter_id"
+    t.integer  "owner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sittings", ["owner_id"], name: "index_sittings_on_owner_id", using: :btree
+  add_index "sittings", ["sitter_id"], name: "index_sittings_on_sitter_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.hstore   "preferences"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "image"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "dogs", "users", column: "owner_id"
+  add_foreign_key "sittings", "users", column: "owner_id"
+  add_foreign_key "sittings", "users", column: "sitter_id"
 end

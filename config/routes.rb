@@ -1,14 +1,5 @@
 GobbleBreak::Application.routes.draw do
-    devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
-
     root :to => 'home#index'
-
-    get 'auth/:provider/callback', to: 'sessions#create'
-    get 'signout', to: 'sessions#destroy'
-
-    get 'tos' => 'tos#index'
-
-    post 'game_sessions', to: 'game_sessions#create'
 
     #authenticated :user do
     #  root :to => 'home#index'

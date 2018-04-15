@@ -16,7 +16,7 @@ development:
   #gobblebreak
   password: manray
   #foobar
-  database: gobblebreak_development
+  database: rover
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -29,8 +29,8 @@ development:
 
 test:
   <<: *default
-  database: gobblebreak_test
+  database: rover_test
 
 production:
   <<: *default
-  database: gobblebreak_production
+  database: rover_prod
