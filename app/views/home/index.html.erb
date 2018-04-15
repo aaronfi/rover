@@ -1,96 +1,15 @@
 <div class="container" id="topContainer">
-    <div class="col-sm-4" id="leftPane">
-<!--
-        <div class="inputs">
-
-            <div class="input-group" id="sizexy">
-                <span class="input-group-addon" id="size">Size</span>
-                <input type="text" class="form-control" id="sizex" tabindex=1>
-                <span class="input-group-addon">by</span>
-                <input type="text" class="form-control" id="sizey" tabindex=2>
-            </div>
-            <div class="input-group min-max-words">
-                <div class="input-group">
-                    <span class="input-group-addon">At least</span>
-                    <input type="text" class="form-control" id="minwords" tabindex=3>
-                    <span class="input-group-addon">words</span>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon">At most</span>
-                    <input type="text" class="form-control" id="maxwords" tabindex=4>
-                    <span class="input-group-addon">words</span>
-                </div>
-            </div>
--->
-
+    <div class="col-sm-12">
+        <div class="list-container">
+            <ul class="list-group">
+                <% @sitters.each do |sitter| %>
+                    <li class="list-group-item">
+                        <%= image_tag sitter.image_url, size: "32x32", alt: "Sitter Photo" %>
+                        <span><%= sitter.name %></span>
+                        <span class="label label-default label-pill pull-right">TODO Rating Score placeholder 123</span>
+                    </li>
+                <% end %>
+            </ul>
         </div>
-    </div>
-
-    <div class="col-sm-6" id="centerPane">
-
-<!--        <div class="ui-widget-content ui-resizable hidden" id="resizable">
-            <div class="row">
-                <div class="container top-controls">
-                    <div class="col-sm-12">
-
-                        <span>
-                            <button type="button" class="btn btn-secondary btn-lg" tabindex=6 id="shuffleButton" data-toggle="tooltip" data-placement="left" title="Hold space bar for repeated shuffling">Shuffle</button>
-                            <button type="button" class="btn btn-primary btn-lg" tabindex=7 id="endButton">End</button>
-                        </span>
-
-                        <div class="input-group centerBlock">
-                            <span class="input-group-addon">Timer</span>
-                            <input type="text" class="form-control" id="timer" tabindex=6>
-                        </div>
-
-                        <span>
-                            <button type="button" class="btn btn-primary btn-lg" id="startButton" tabindex=8 data-toggle="tooltip" data-placement="right" title="Hit enter to start, or just swipe your first word.">Start</button>
-                            <button type="button" class="btn btn-primary btn-lg" id="pauseButton" tabindex=9>Pause</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" id="progressBarRow">
-                <div class="container more-top-controls">
-                    <div class="col-sm-12 progress-column">
-                        <progress class="progress progress-success" id="progressBar" value="0" max="100"></progress>
-                    </div>
-                    <div class="col-sm-12 progress-column">
-                        <div id="progressBarLeft">&nbsp;</div>
-                        <div id="progressBarRight">&nbsp;</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-1">
-                    <div class="draggable-arrow"><i class="fa fa-arrows"></i></div>
-                </div>
-                <div class="col-sm-11">
-                </div>
-            </div>
-
-            <div class="row board-row">
-                <div class="col-sm-1">
-                </div>
-                <div class="col-sm-11 board-column">
-                    <div id="board-container">
-                        <canvas id="canvas"></canvas>
-                        <div id="board" class="board"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>-->
-    </div>
-
-    <div class="col-sm-2" id="rightPane">
-<!--        <li class="list-group-item hidden" id="newGuess">
-            <span class="label label-default label-pill pull-right"></span>
-            <span></span>
-        </li>
-
-        <ul class="list-group" id="guesses" />-->
     </div>
 </div>

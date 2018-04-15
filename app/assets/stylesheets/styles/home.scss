@@ -18,7 +18,6 @@ body > div#topContainer {
     @include disable-text-selection;
 }
 // /NOTE
-
 //    How to use rem and px together:
 //    You can set everything as e.g. 1.6rem, 2rem
 //    and then at the top-level, assign 1rem = n pixels
@@ -354,4 +353,21 @@ ul.nav li:hover > .dropdown-menu {
 .sign-in {
     margin-top: rem-calc(90);
     text-align: center;
+}
+
+.list-container {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.list-group-item {
+    text-wrap: none;
+    white-space:nowrap;
+    overflow: hidden;
+    span {
+        margin-left: 10px;
+        text-wrap: none;
+        white-space: nowrap;
+        overflow: hidden;
+    }
 }
