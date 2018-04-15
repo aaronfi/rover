@@ -58,13 +58,19 @@ ActiveRecord::Schema.define(version: 20140422062725) do
     t.string   "email"
     t.string   "phone_number"
     t.string   "image_url"
-    t.boolean  "is_owner",     default: false
-    t.boolean  "is_sitter",    default: false
+    t.boolean  "is_owner",           default: false
+    t.boolean  "is_sitter",          default: false
+    t.float    "sitter_score",       default: 0.0
+    t.float    "ratings_score",      default: 0.0
+    t.float    "sitter_rank",        default: 0.0
+    t.float    "review_ratings_sum", default: 0.0
+    t.integer  "num_sitter_stays",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["sitter_rank"], name: "index_users_on_sitter_rank", using: :btree
 
   add_foreign_key "dogs", "users", column: "owner_id"
   add_foreign_key "sittings", "users", column: "owner_id"

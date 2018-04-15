@@ -47,8 +47,16 @@ class CreateInitialSchemas < ActiveRecord::Migration
             t.boolean :is_owner, default: false
             t.boolean :is_sitter, default: false
 
+            t.float :sitter_score, default: 0.0
+            t.float :ratings_score, default: 0.0
+            t.float :sitter_rank, index: true, default: 0.0
+
+            t.float :review_ratings_sum, default: 0.0
+            t.integer :num_sitter_stays, default: 0
+
             t.timestamps
         end
+        add_index :users, :email, :unique => true
 
         create_table :dogs do |t|
             t.string :name
@@ -78,8 +86,6 @@ class CreateInitialSchemas < ActiveRecord::Migration
 
             t.timestamps
         end
-
-        add_index :users, :email, :unique => true
     end
 end
 

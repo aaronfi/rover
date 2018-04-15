@@ -2,4 +2,60 @@ class User < ActiveRecord::Base
     has_many :dogs
     has_many :sittings
     has_many :review, :through => :sittings
+
+    SITTER_STAY_COUNT_CUTOFF = 10
+
+    after_create :update_sitter_score_and_save
+    # after_update :update_sitter_score_and_save, :if => :name_changed?
+
+    def update_sitter_score
+        self.sitter_score = calc_sitter_score()
+    end
+
+    def update_sitter_score_and_save
+        update_sitter_score
+        save!
+    end
+
+    def update_ratings_score
+        self.ratings_score = calc_ratings_score()
+    end
+
+    def update_sitter_rank
+        self.sitter_rank = calc_sitter_rank()
+    end
+
+    private
+    def calc_sitter_score
+        # Sitter Score is 5 times the fraction of the English alphabet comprised by
+        # the distinct letters in what we've recovered of the sitter's name.
+
+        (5.0 * self.name.downcase.chars.uniq.select { /[a-z]/ }.length) / 26.0
+    end
+
+    def calc_ratings_score
+        # Ratings Score is the average of their stay ratings.
+
+        self.review_ratings_sum / self.num_sitter_stays
+    end
+
+    def calc_sitter_rank
+        # The Overall Sitter Rank is a weighted average of the Sitter Score and Ratings Score,
+        # weighted by the number of stays.  When a sitter has no stays, their Overall Sitter Rank is
+        # equal to the Sitter Score.  When a sitter has 10 or more stays, their Overall Sitter Rank
+        # is equal to the Ratings Score.
+
+        if self.num_sitter_stays == 0
+            return self.sitter_score
+        elsif self.num_sitter_stays >= SITTER_STAY_COUNT_CUTOFF
+            return self.ratings_score
+        else
+            return (((SITTER_STAY_COUNT_CUTOFF - self.num_sitter_stays) / SITTER_STAY_COUNT_CUTOFF.to_f) * self.sitter_score
+                   + (self.num_sitter_stays / SITTER_STAY_COUNT_CUTOFF.to_f) * self.ratings_score)
+        end
+    end
 end
+
+# The Overall Sitter Rank and its score components must be kept up to date.
+# That means whenever a relevant event happens, that could affect the Overall Sitter Rank, we need to recompute it.
+# Think about what can make the Overall Sitter Rank change.
