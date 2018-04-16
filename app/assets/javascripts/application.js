@@ -12,5 +12,4 @@
 //
 //= require jquery
 //= require vendor/jqconsole.min
-//= require vendor/tether.min
 //= require vendor/bootstrap
