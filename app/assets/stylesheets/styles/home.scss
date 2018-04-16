@@ -123,7 +123,7 @@ ul.nav.navbar-nav {
     background-size: cover;
     background-position: center top;
     background-color: #27ae60;
-    background-image: url(../assets/images/backgrounds/blackhole.jpg);
+    background-image: url(../assets/images/backgrounds/puppies.jpg);
 }
 
 #subheading {
@@ -175,6 +175,7 @@ ul.nav.navbar-nav {
     text-wrap: none;
     white-space:nowrap;
     overflow: hidden;
+    opacity: 0.75;
 
     span {
         margin-left: 10px;
