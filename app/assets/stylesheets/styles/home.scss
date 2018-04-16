@@ -55,8 +55,9 @@ html {
 
 .navbar-default {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: lightslategrey;
+    background-color: black;
     border-color: #e7e7e7;
+    color: white;
     letter-spacing: rem-calc(1) !important;
 
     // vertically centers our variable height columns in the same row
@@ -65,17 +66,17 @@ html {
     display: -webkit-flex;
     display: flex;
 
-    align-items:center;
+    align-items: center;
     -webkit-align-items: center;
 
     .navbar-nav {
         a, a:focus {
-            color: #555;
+            color: #white;
         }
 
         a:hover {
-            color: blue;
-            background-color: white;
+            color: lightblue;
+            background-color: black;
             transition: 0.25s;
             text-decoration: none;
         }
@@ -165,11 +166,6 @@ ul.nav.navbar-nav {
     }
 }
 
-.sign-in {
-    margin-top: rem-calc(90);
-    text-align: center;
-}
-
 .list-container {
     margin-top: 100px;
     margin-bottom: 50px;
@@ -179,6 +175,7 @@ ul.nav.navbar-nav {
     text-wrap: none;
     white-space:nowrap;
     overflow: hidden;
+
     span {
         margin-left: 10px;
         text-wrap: none;
