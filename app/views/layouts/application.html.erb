@@ -12,6 +12,7 @@
         <%= csrf_meta_tags %>
     </head>
     <body>
+        <%= javascript_include_tag "application" %>
         <%= render 'layouts/header' %>
         <%= yield %>
         <%= render 'layouts/footer' %>
