@@ -51,7 +51,7 @@ class CreateInitialSchemas < ActiveRecord::Migration
             t.float :ratings_score, default: 0.0
             t.float :sitter_rank, index: true, default: 0.0
 
-            t.float :review_ratings_sum, default: 0.0
+            t.integer :review_ratings_sum, default: 0
             t.integer :num_sitter_stays, default: 0
 
             t.timestamps

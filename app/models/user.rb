@@ -12,7 +12,7 @@
 #  sitter_score       :float            default(0.0)
 #  ratings_score      :float            default(0.0)
 #  sitter_rank        :float            default(0.0)
-#  review_ratings_sum :float            default(0.0)
+#  review_ratings_sum :integer          default(0)
 #  num_sitter_stays   :integer          default(0)
 #  created_at         :datetime
 #  updated_at         :datetime
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     def calc_ratings_score
         # Ratings Score is the average of their stay ratings.
 
-        self.review_ratings_sum / self.num_sitter_stays
+        self.review_ratings_sum.to_f / self.num_sitter_stays
     end
 
     def calc_sitter_rank
@@ -75,8 +75,10 @@ class User < ActiveRecord::Base
         elsif self.num_sitter_stays >= SITTER_STAY_COUNT_CUTOFF
             return self.ratings_score
         else
-            return (((SITTER_STAY_COUNT_CUTOFF - self.num_sitter_stays) / SITTER_STAY_COUNT_CUTOFF.to_f) * self.sitter_score
-                   + (self.num_sitter_stays / SITTER_STAY_COUNT_CUTOFF.to_f) * self.ratings_score)
+            weighting1 = ((SITTER_STAY_COUNT_CUTOFF - self.num_sitter_stays) / SITTER_STAY_COUNT_CUTOFF.to_f)
+            weighting2 = (self.num_sitter_stays / SITTER_STAY_COUNT_CUTOFF.to_f)
+
+            return weighting1 * self.sitter_score + weighting2 * self.ratings_score
         end
     end
 end

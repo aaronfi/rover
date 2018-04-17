@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20140422062725) do
     t.float    "sitter_score",       default: 0.0
     t.float    "ratings_score",      default: 0.0
     t.float    "sitter_rank",        default: 0.0
-    t.float    "review_ratings_sum", default: 0.0
+    t.integer  "review_ratings_sum", default: 0
     t.integer  "num_sitter_stays",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"

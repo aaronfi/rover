@@ -8,8 +8,20 @@ The recovered sample data implies that dog owners and sitters do not overlap.  B
 
 Similarly, the sample data implies that only owners can leave reviews of sitters.  But I made Reviews its own entity (as opposed to just being attribute information on Sittings), should we want to allow for multiple (time-series?) reviews down the road, or allow sitters to also leave reviews of the dog owners (e.g. the Uber two-way review model).
 
+Lastly, the sample data implies that the same set of dogs per owner were always dog-sat together as a group.  But really this is not a guarantee, as the same owner-sitter sitting one day might include all dogs, and the next day only some of them.  So I made Dogs its own entity.  Doing so would accommodate scenarios where dogs change ownership, and split payment use cases where two or more owners hire one sitter to sit their combined set of dogs.
 
+For importing the data, I did not do anything robust like writing an importer class that mapped the csv columns into the appropriate creation calls.  Rather I just rigged up an Excel spreadsheet to render the necessary code to be pasted into seeds.rb.  I've included this file at ./reviews.xlsx
 
+The format of a sitting's start_date and end_date was not clear to me, so I just left them as strings, instead of a properly sanitized datetime value.
+
+# View on Heroku:
+http://interview-aaronfi.herokuapp.com
+
+# Installation
+TODO
+
+# Running unit tests
+At the command-line, type "rake".
 
 # Rover Coding Project
 
@@ -50,7 +62,7 @@ Using the information in the file, we need to design a database schema and impor
 - The Overall Sitter Rank is a weighted average of the Sitter Score and Ratings Score, weighted by the number of stays. When a sitter has no stays, their Overall Sitter Rank is equal to the Sitter Score.  When a sitter has 10 or more stays, their Overall Sitter Rank is equal to the Ratings Score.
 - In the event that two or more sitters have the same Overall Sitter Rank, the ordering is unimportant and does not need to be handled.
 
-The Overall Sitter Rank and it's score components must be kept up to date. That means whenever a relevant event happens, that could affect the Overall Sitter Rank, we need to recompute it.
+The Overall Sitter Rank and its score components must be kept up to date. That means whenever a relevant event happens, that could affect the Overall Sitter Rank, we need to recompute it.
 
 Think about what can make the Overall Sitter Rank change.
 
