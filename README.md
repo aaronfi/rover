@@ -1,3 +1,16 @@
+# Aaron Fischer write-up
+
+I wrote this up using Ruby on Rails 4.x -- having dusted off and repurposed old code from my http://www.gobblebreak.com project (a Boggle game website).
+
+I decomposed the Rover.com schema into four entities (users, dogs, sittings, and reviews), with future-proofing in mind.
+
+The recovered sample data implies that dog owners and sitters do not overlap.  But really there should be nothing stopping someone from being both an owner and a sitter in the system at the same time.  So, I grouped both roles into the same "Users" table.
+
+Similarly, the sample data implies that only owners can leave reviews of sitters.  But I made Reviews its own entity (as opposed to just being attribute information on Sittings), should we want to allow for multiple (time-series?) reviews down the road, or allow sitters to also leave reviews of the dog owners (e.g. the Uber two-way review model).
+
+
+
+
 # Rover Coding Project
 
 Rover.com was destroyed in a terrible Amazon and GitHub accident.

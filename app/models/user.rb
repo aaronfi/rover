@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
         # Sitter Score is 5 times the fraction of the English alphabet comprised by
         # the distinct letters in what we've recovered of the sitter's name.
 
-        (5.0 * self.name.downcase.chars.uniq.select { /[a-z]/ }.length) / 26.0
+        (5.0 * self.name.downcase.chars.uniq.select { |c| c =~ /[a-z]/ }.length) / 26.0
     end
 
     def calc_ratings_score
@@ -80,7 +80,3 @@ class User < ActiveRecord::Base
         end
     end
 end
-
-# The Overall Sitter Rank and its score components must be kept up to date.
-# That means whenever a relevant event happens, that could affect the Overall Sitter Rank, we need to recompute it.
-# Think about what can make the Overall Sitter Rank change.

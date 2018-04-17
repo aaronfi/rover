@@ -20,6 +20,8 @@ group :test, :development do
   	gem 'poltergeist'
 end
 
+gem 'simplecov', require: false, group: :test
+
 # per https://devcenter.heroku.com/articles/getting-started-with-rails4
 
 gem 'puma'  # Use this web server instead of Rails' built-in default of WEBrick, which is single-threaded and meant only for development purposes.  https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server
