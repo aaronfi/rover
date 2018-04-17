@@ -1,0 +1,44 @@
+# == Schema Information
+#
+# Table name: sittings
+#
+#  id         :integer          not null, primary key
+#  start_date :string
+#  end_date   :string
+#  sitter_id  :integer
+#  owner_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+sitting1:
+    id: 1
+    start_date: "41225"
+    end_date: "41262"
+    sitter_id: 3
+    owner_id: 1
+
+sitting2:
+    id: 2
+    start_date: "41225"
+    end_date: "41262"
+    sitter_id: 3
+    owner_id: 1
+
+sitting3:
+    id: 3
+    start_date: "41225"
+    end_date: "41262"
+    sitter_id: 3
+    owner_id: 1
+
+sitting4:
+    id: 4
+    start_date: "41225"
+    end_date: "41262"
+    sitter_id: 4
+    owner_id: 2
+
+# TODO(aaronfi): I'll need fixture data for the dogs_sittings junction table... ?

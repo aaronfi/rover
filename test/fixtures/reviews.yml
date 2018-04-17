@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id            :integer          not null, primary key
+#  sitting_id    :integer
+#  review_text   :text
+#  review_rating :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+review1:
+    id: 1
+    sitting_id: 1
+    review_text: "some review text1"
+    review_rating: 5
+
+review2:
+    id: 2
+    sitting_id: 2
+    review_text: "some review text2"
+    review_rating: 4
+
+review3:
+    id: 3
+    sitting_id: 3
+    review_text: "some review text3"
+    review_rating: 3
+
+review4:
+    id: 4
+    sitting_id: 4
+    review_text: "some review text4"
+    review_rating: 2

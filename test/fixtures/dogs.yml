@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: dogs
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  owner_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+dog1:
+    id: 1
+    name: "dog1"
+    owner_id: 1
+
+dog2:
+    id: 2
+    name: "dog2"
+    owner_id: 1
+
+dog3:
+    id: 3
+    name: "dog3"
+    owner_id: 1
+
+dog4:
+    id: 4
+    name: "dog4"
+    owner_id: 2
