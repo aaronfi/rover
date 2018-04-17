@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                 :integer          not null, primary key
+#  name               :string
+#  email              :string
+#  phone_number       :string
+#  image_url          :string
+#  is_owner           :boolean          default(FALSE)
+#  is_sitter          :boolean          default(FALSE)
+#  sitter_score       :float            default(0.0)
+#  ratings_score      :float            default(0.0)
+#  sitter_rank        :float            default(0.0)
+#  review_ratings_sum :float            default(0.0)
+#  num_sitter_stays   :integer          default(0)
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+# Indexes
+#
+#  index_users_on_email        (email) UNIQUE
+#  index_users_on_sitter_rank  (sitter_rank)
+#
+
 class User < ActiveRecord::Base
     has_many :dogs
     has_many :sittings

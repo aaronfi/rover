@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id            :integer          not null, primary key
+#  sitting_id    :integer
+#  review_text   :text
+#  review_rating :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+# Indexes
+#
+#  index_reviews_on_sitting_id  (sitting_id)
+#
+
 class Review < ActiveRecord::Base
     belongs_to :sitting
 
