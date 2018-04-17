@@ -8,23 +8,23 @@ http://interview-aaronfi.herokuapp.com
 
 ### How do I install this locally?
 
-% git clone https://github.com/roverjobs/interview-aaronfi.git
-% cd interview-aaronfi
-% bundle install
-% rake db:drop; rake db:create; rake db:migrate; rake db:seed
-% rails server
+    % git clone https://github.com/roverjobs/interview-aaronfi.git
+    % cd interview-aaronfi
+    % bundle install
+    % rake db:drop; rake db:create; rake db:migrate; rake db:seed
+    % rails server
 
 Then open http://localhost:3000/
 
 ### How do I run your unit tests?
 
-% cd interview-aaronfi
-% rake
+    % cd interview-aaronfi
+    % rake
 
 ### How do I see your unit test coverage?
 
-% cd interview-aaronfi
-% open ./coverage/index.html
+    % cd interview-aaronfi
+    % open ./coverage/index.html
 
 ### Walk me through your approach.
 
