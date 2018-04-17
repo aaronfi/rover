@@ -7,7 +7,6 @@
                         <%= image_tag sitter.image_url, size: "32x32", alt: "Sitter Photo" %>
                         <span><%= sitter.name %></span>
                         <span class="label label-default label-pill pull-right">Score: <%= '%.2f' % sitter.ratings_score %></span>
-                        <span class="label label-default label-pill pull-right">Rank: <%= '%.2f' % sitter.sitter_rank %></span>
                     </li>
                 <% end %>
             </ul>

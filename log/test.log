@@ -156,3 +156,162 @@ LINE 1: DELETE FROM "puzzle_viewings"
 : DELETE FROM "puzzle_viewings"
   [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
   [1m[35m (0.7ms)[0m  ALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL
+  [1m[36m (135.8ms)[0m  [1mDROP DATABASE IF EXISTS "rover_test"[0m
+  [1m[35m (1713.5ms)[0m  CREATE DATABASE "rover_test" ENCODING = 'unicode'
+  [1m[36mSQL (1.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35mSQL (83.4ms)[0m  CREATE EXTENSION IF NOT EXISTS "hstore"
+  [1m[36m (243.7ms)[0m  [1mCREATE TABLE "dogs" ("id" serial primary key, "name" character varying, "owner_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.3ms)[0m  CREATE  INDEX  "index_dogs_on_owner_id" ON "dogs" USING btree ("owner_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "dogs_sittings" ("sitting_id" integer NOT NULL, "dog_id" integer NOT NULL) [0m
+  [1m[35m (6.1ms)[0m  CREATE TABLE "reviews" ("id" serial primary key, "sitting_id" integer, "review_text" text, "review_rating" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.9ms)[0m  [1mCREATE  INDEX  "index_reviews_on_sitting_id" ON "reviews" USING btree ("sitting_id")[0m
+  [1m[35m (5.2ms)[0m  CREATE TABLE "sittings" ("id" serial primary key, "start_date" character varying, "end_date" character varying, "sitter_id" integer, "owner_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.7ms)[0m  [1mCREATE  INDEX  "index_sittings_on_owner_id" ON "sittings" USING btree ("owner_id")[0m
+  [1m[35m (2.3ms)[0m  CREATE  INDEX  "index_sittings_on_sitter_id" ON "sittings" USING btree ("sitter_id")
+  [1m[36m (6.3ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "email" character varying, "phone_number" character varying, "image_url" character varying, "is_owner" boolean DEFAULT 'f', "is_sitter" boolean DEFAULT 'f', "sitter_score" float DEFAULT 0.0, "ratings_score" float DEFAULT 0.0, "sitter_rank" float DEFAULT 0.0, "review_ratings_sum" float DEFAULT 0.0, "num_sitter_stays" integer DEFAULT 0, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.0ms)[0m  CREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")
+  [1m[36m (1.8ms)[0m  [1mCREATE  INDEX  "index_users_on_sitter_rank" ON "users" USING btree ("sitter_rank")[0m
+  [1m[35m (6.6ms)[0m  ALTER TABLE "dogs" ADD CONSTRAINT "fk_rails_95be3172cf"
+FOREIGN KEY ("owner_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (3.9ms)[0m  [1mALTER TABLE "sittings" ADD CONSTRAINT "fk_rails_e5d7381707"
+FOREIGN KEY ("owner_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.2ms)[0m  ALTER TABLE "sittings" ADD CONSTRAINT "fk_rails_b95a4e5005"
+FOREIGN KEY ("sitter_id")
+  REFERENCES "users" ("id")
+
+  [1m[36m (3.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (2.2ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36m (1.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140422062725')
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.5ms)[0m  [1mALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.7ms)[0m  [1mDELETE FROM "puzzle_viewings"[0m
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (2.2ms)[0m  [1mALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "puzzle_viewings"
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "puzzle_viewings"[0m
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m  ALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "puzzle_viewings"
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  ALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "puzzle_viewings"[0m
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (2.7ms)[0m  [1mALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "puzzle_viewings"
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (1.1ms)[0m  ALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "puzzle_viewings"[0m
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (1.3ms)[0m  [1mALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "puzzle_viewings"
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "puzzle_viewings"[0m
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (2.0ms)[0m  ALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "puzzle_viewings"
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (1.1ms)[0m  ALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "puzzle_viewings"[0m
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "puzzle_viewings"
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "puzzle_viewings"[0m
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "dogs_sittings" DISABLE TRIGGER ALL;ALTER TABLE "reviews" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "dogs" DISABLE TRIGGER ALL;ALTER TABLE "sittings" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "puzzle_viewings"
+PG::UndefinedTable: ERROR:  relation "puzzle_viewings" does not exist
+LINE 1: DELETE FROM "puzzle_viewings"
+                    ^
+: DELETE FROM "puzzle_viewings"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "dogs_sittings" ENABLE TRIGGER ALL;ALTER TABLE "reviews" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "dogs" ENABLE TRIGGER ALL;ALTER TABLE "sittings" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
