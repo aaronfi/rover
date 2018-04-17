@@ -48,5 +48,7 @@ That said, the scores are currently computed with each insert, so sorting and li
 
 I also would prefer to write more unit tests to ensure my scoring logic correctly updates for all events in the wild (e.g. if a user changes their name, the sitter_score should be recalculated;  e.g. are deletes handled appropriately?).  
 
+Lastly, the UI might have some rough areas (e.g. it's not quite mobile responsive).
+
 
 
