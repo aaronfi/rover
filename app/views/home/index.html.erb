@@ -1,36 +1,36 @@
 <div class="container" id="topContainer">
-    <div class="col-sm-4" id="leftPane">
+    <div class="col-sm-3" id="leftPane">
         <div class="inputs">
-            <label class="c-input c-checkbox">
-                <span class="c-indicator"></span>
-                Only show sitters with a Rating Score of
-            </label>
+            <div>
+                <span class="label text-shadow">Show sitters with scores:</span>
+            </div>
 
-            <div class="input-group min-max-words">
+            <div class="input-group min-max-scores">
                 <div class="input-group">
                     <span class="input-group-addon">At least</span>
-                    <input type="text" class="form-control" id="minwords" tabindex=3>
+                    <input type="text" class="form-control" id="minScore" tabindex=3 value="0">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">At most</span>
-                    <input type="text" class="form-control" id="maxwords" tabindex=4>
+                    <input type="text" class="form-control" id="maxScore" tabindex=4 value="5">
                 </div>
             </div>
 
-            <div class="input-group min-max-words-slider">
-                <input id="minMaxWordsSlider" data-slider-id='minMaxWordsSlider' type="text" data-slider-min="0" data-slider-max="5.0" data-slider-step="0.1" data-slider-value="0" />
+            <div class="input-group min-max-scores-slider">
+                <input id="minMaxScoreSlider" data-slider-id='minMaxScoreSlider' type="text" data-slider-min="0" data-slider-max="5.0" data-slider-step="0.1" data-slider-value="0" />
             </div>
         </div>
     </div>
 
-    <div class="col-sm-8">
+    <div class="col-sm-6">
         <div class="list-container">
-            <ul class="list-group">
+            <ul class="list-group" id="sitters">
                 <% @sitters.each do |sitter| %>
-                    <li class="list-group-item">
-                        <%= image_tag sitter.image_url, size: "32x32", alt: "Sitter Photo" %>
+                    <li class="list-group-item" data-ratings-score="<%= '%.2f' % sitter.ratings_score %>">
+                        <!-- NOTE DEBUGGERY(aaronfi) hard-coding a single image placeholder for perf reasons, for now -->
+                        <%= image_tag 'http://placekitten.com/g/500/500?user=24', size: '32x32', alt: 'Sitter Photo' %>
                         <span><%= sitter.name %></span>
-                        <span class="label label-default label-pill pull-right">Score: <%= '%.2f' % sitter.ratings_score %></span>
+                        <span class="label <%= sitter.ratings_score >= 4.0 ? 'label-success' : 'label-default' %> label-pill pull-right"><%= '%.2f' % sitter.ratings_score %></span>
                     </li>
                 <% end %>
             </ul>

@@ -472,8 +472,18 @@ canvas {
     }
 }
 
+.label {
+    font-size: 100%;
+    line-height: inherit;
+}
+
+.text-shadow {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-size: 125%;
+}
 
 .inputs {
+    position: fixed;
     display: inline-block;
     margin-top: rem-calc(90);
 
@@ -502,7 +512,7 @@ canvas {
             }
         }
 
-        &.min-max-words {
+        &.min-max-scores {
             .input-group {
                 width: 100%;
                 .form-control {
@@ -531,17 +541,12 @@ canvas {
             }
         }
 
-        &.min-max-words-slider {
+        &.min-max-scores-slider {
             padding-bottom: rem-calc(10);
 
             .slider-track-low, .slider-track-high {
                 background: #BABABA;
             }
-        }
-
-        .c-checkbox {
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-            color: white;
         }
     }
 }
